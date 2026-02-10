@@ -1,0 +1,12 @@
+name: diffusion-1d
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - numpy
+  - matplotlib
+  - scikit-learn    # for generating synthetic 1D/2D manifolds
+  - jupyter
+  - tqdm
