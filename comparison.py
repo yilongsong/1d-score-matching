@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # --- 1. CONFIGURATION ---
-N_C_POINTS = 50        # Sampling density along C
+N_C_POINTS = 100        # Sampling density along C
 EPOCHS = 1000           # Training length
 HIDDEN_DIM = 64         # Model size
 BATCH_SIZE = 64
@@ -13,7 +13,8 @@ BATCH_SIZE = 64
 # --- 2. DATA GENERATION ---
 def get_grid_data(n_c_points, samples_per_point):
     """Generates training data on a fixed grid."""
-    c_grid = np.linspace(0, np.pi, n_c_points)
+    # c_grid = np.linspace(0, np.pi, n_c_points) # Fixed distance grid 
+    c_grid = np.random.uniform(0, np.pi, n_c_points) # Random sampling from condition space
     c_repeated = np.repeat(c_grid, samples_per_point)
     
     mode_choice = np.random.randint(0, 2, size=len(c_repeated))
@@ -223,16 +224,16 @@ if __name__ == "__main__":
     
     # 1. Plot Ground Truth in first column
     generate_ground_truth(axes[0, 0])
-    axes[0, 0].text(-0.35, 0.5, "Diffusion", transform=axes[0,0].transAxes, 
-                    fontsize=14, rotation=90, va='center', fontweight='bold')
+    # axes[0, 0].text(-0.35, 0.5, "Diffusion", transform=axes[0,0].transAxes, 
+    #                 fontsize=14, rotation=90, va='center', fontweight='bold')
     
     generate_ground_truth(axes[1, 0])
-    axes[1, 0].text(-0.35, 0.5, "Flow Matching", transform=axes[1,0].transAxes, 
-                    fontsize=14, rotation=90, va='center', fontweight='bold')
+    # axes[1, 0].text(-0.35, 0.5, "Flow Matching", transform=axes[1,0].transAxes, 
+    #                 fontsize=14, rotation=90, va='center', fontweight='bold')
     
     # 2. Experiment Configs
     configs = [
-        {"name": "Single-Sample Dataset\nk=1, Sparse", "k": 1},
+        {"name": "Single-Sample Dataset\nk=1", "k": 1},
         {"name": "Multiple-Sample-Per-Condition Dataset\nk=5", "k": 5},
         {"name": "Multiple-Sample-Per-Condition Dataset\nk=20", "k": 20}
     ]
